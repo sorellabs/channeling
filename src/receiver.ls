@@ -95,13 +95,13 @@ default-configuration = (app) ->
 
 define-routes-for = (app) ->
   app.post '/:id/connect' (request, response) ->
-    id         = req.params.id
-    handshake  = JSON.parse req.body
+    id         = request.params.id
+    handshake  = JSON.parse request.body
 
     connection = if id of receivers => receivers[id].connect handshake
                  else               => Error (UnknownReceiver id)
 
-    res `send` connection.map
+    response `send` connection.map
 
   app.post '/:id/status' (request, response) ->
   app.post '/:id/close' (request, response) ->
