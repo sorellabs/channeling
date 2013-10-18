@@ -34,7 +34,7 @@ signal    = require 'shoutout'
 
 { Maybe, Either, Error, Success } = require './monads'
 { Base }                          = require 'boo'
-{ kind-of }                       = reuqire './utils'
+{ kind-of }                       = require './utils'
 { send }                          = require './http'
 
 
