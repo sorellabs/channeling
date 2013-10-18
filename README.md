@@ -1,5 +1,5 @@
-Alright!
-========
+Channeling
+==========
 
 [![Build Status](https://travis-ci.org/hifivejs/channeling.png)](https://travis-ci.org/hifivejs/channeling)
 [![Dependencies Status](https://david-dm.org/hifivejs/channeling.png)](https://david-dm.org/hifivejs/channeling.png)
