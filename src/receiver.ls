@@ -35,6 +35,7 @@ signal    = require 'shoutout'
 { Maybe, Either, Error, Success } = require './monads'
 { Base }                          = require 'boo'
 { kind-of }                       = reuqire './utils'
+{ send }                          = require './http'
 
 
 # -- Aliases -----------------------------------------------------------
@@ -63,6 +64,11 @@ export UnknownConnection = (connection) ->
      , connection
 
 
+export UnknownReceiver = (id) ->
+  flaw 'UnknownReceiver'
+     , "No registered receiver matches the id #id"
+
+
 # -- Public API --------------------------------------------------------
 export listen = (port = 0, configure = default-configuration) ->
   promise = pinky!
@@ -88,10 +94,17 @@ default-configuration = (app) ->
 
 
 define-routes-for = (app) ->
-  app.post '/:id/connect' (req, res) ->
-    
-  app.post '/:id/:connection/status' (req, res) ->
-  app.post '/:id/:connection/close' (req, res) ->
+  app.post '/:id/connect' (request, response) ->
+    id         = req.params.id
+    handshake  = JSON.parse req.body
+
+    connection = if id of receivers => receivers[id].connect handshake
+                 else               => Error (UnknownReceiver id)
+
+    res `send` connection.map (.serialise!)
+
+  app.post '/:id/status' (request, response) ->
+  app.post '/:id/close' (request, response) ->
 
 
 make-proper-expectations-from = (x) ->
