@@ -95,16 +95,19 @@ default-configuration = (app) ->
 
 define-routes-for = (app) ->
   app.post '/:id/connect' (request, response) ->
-    id         = request.params.id
-    handshake  = JSON.parse request.body
+    response `send` (receiver-for request).map ([r, v]) -> r.connect v
 
-    connection = if id of receivers => receivers[id].connect handshake
-                 else               => Error (UnknownReceiver id)
-
-    response `send` connection.map
 
   app.post '/:id/status' (request, response) ->
-  app.post '/:id/close' (request, response) ->
+    response `send` (receiver-for request).map ([r, v]) -> r.report v
+
+
+receiver-for = (request) ->
+  id   = request.params.id
+  data = JSON.parse request.body
+
+  if id of receivers => Success [receivers[id], data]
+  else                  Error (UnknownReceiver id)
 
 
 make-proper-expectations-from = (x) ->
@@ -176,10 +179,11 @@ Connection = Base.derive {
                     ignored: []
 
   to-json: ->
-    id             : id
-    client         : client
+    id             : @id
+    client         : @client
     expected-tests : @expected-tests
-    tests          : tests
+    tests          : @tests
+    finished       : @tests.length >= @expected-tests
 }
 
 
