@@ -28,6 +28,9 @@
 
 
 export Maybe = Base.derive {
+  isJust: -> true
+  isNothing: -> false
+
   Nothing :     -> Nothing
   of      : (v) -> @derive value: v
   map     : (f) -> @of (f @value)
@@ -37,6 +40,9 @@ export Maybe = Base.derive {
 }
 
 Nothing = Base.derive {
+  isJust: -> false
+  isNothing: -> true
+
   of     :     -> Nothing
   map    : (f) -> this
   chain  : (f) -> this
