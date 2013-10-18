@@ -42,7 +42,8 @@ signal    = require 'shoutout'
 
 
 # -- Shared state ------------------------------------------------------
-app = null
+app       = null
+receivers = {}
 
 
 # -- Exceptions --------------------------------------------------------
@@ -75,7 +76,10 @@ export listen = (port = 0, configure = default-configuration) ->
   return promise                              
   
 
-export receiver = (expectations) -> Receiver.make expectations
+export receiver = (expectations) -> 
+  a = Receiver.make expectations
+  receivers[a.id] = a
+  return a
 
 
 # -- Private helpers ---------------------------------------------------
