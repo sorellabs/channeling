@@ -101,7 +101,7 @@ define-routes-for = (app) ->
     connection = if id of receivers => receivers[id].connect handshake
                  else               => Error (UnknownReceiver id)
 
-    res `send` connection.map (.serialise!)
+    res `send` connection.map
 
   app.post '/:id/status' (request, response) ->
   app.post '/:id/close' (request, response) ->
@@ -173,7 +173,13 @@ Connection = Base.derive {
 
                   * passed : []
                     failed : []
-                    ignored: []                    
+                    ignored: []
+
+  to-json: ->
+    id             : id
+    client         : client
+    expected-tests : @expected-tests
+    tests          : tests
 }
 
 
