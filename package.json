@@ -22,5 +22,15 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/hifivejs/channeling/issues"
+  },
+  "dependencies": {
+    "boo": "~2.0.0",
+    "pinky": "~0.1.3",
+    "pinky-for-fun": "~0.2.1",
+    "pinky-combinators": "~0.1.1",
+    "shoutout": "~1.0.1",
+    "express": "~3.4.1",
+    "uuid": "~1.4.1",
+    "minimatch": "~0.2.12"
   }
 }
