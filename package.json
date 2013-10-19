@@ -4,7 +4,7 @@
   "description": "A library for aggregating language-neutral/framework-neutral test results over HTTP.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "$(npm bin)/lsc tests/node.ls"
   },
   "repository": {
     "type": "git",
@@ -31,6 +31,13 @@
     "shoutout": "~1.0.1",
     "express": "~3.4.1",
     "uuid": "~1.4.1",
-    "minimatch": "~0.2.12"
+    "minimatch": "~0.2.12",
+    "flaw": "~0.1.0"
+  },
+  "devDependencies": {
+    "hifive-tap": "~0.1.0",
+    "hifive": "~0.1.0",
+    "LiveScript": "~1.2.0",
+    "alright": "~0.1.0"
   }
 }

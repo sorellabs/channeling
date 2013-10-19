@@ -65,24 +65,24 @@ export Either = Base.derive {
     | @isRight! => g @value    
 
   chain: (f) -> @fold do
-                      * (l) -> @Left l
+                      * (l) ~> @Left l
                       * (v) -> f v
 
   swap: -> @fold do
-                 * (l) -> @Right l
-                 * (r) -> @Left r
+                 * (l) ~> @Right l
+                 * (r) ~> @Left r
 
-  map: (f) -> @chain (v) -> @of (f v)
+  map: (f) -> @chain (v) ~> @of (f v)
     
   bimap: (f, g) -> @fold do
-                         * (l) -> @Left (f l)
-                         * (r) -> @Right (g r)
+                         * (l) ~> @Left (f l)
+                         * (r) ~> @Right (g r)
 
   ap: (b) -> @chain (f) -> b.map f
 
   orElse: (f) -> @fold do
                        * (l) -> f l
-                       * (r) -> @Right r
+                       * (r) ~> @Right r
 }
 
 
