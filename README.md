@@ -7,8 +7,6 @@ Channeling
 [![experimental](http://hughsk.github.io/stability-badges/dist/experimental.svg)](http://github.com/hughsk/stability-badges)
 
 
-[![browser support](http://ci.testling.com/hifivejs/channeling.png)](http://ci.testling.com/hifivejs/channeling)
-
 A library for aggregating language-neutral/framework-neutral test results over HTTP.
 
 
